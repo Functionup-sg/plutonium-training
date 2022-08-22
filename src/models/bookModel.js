@@ -1,17 +1,21 @@
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Schema.Types.ObjectId
+const mongoose = require('mongoose')
+const ObjectId= mongoose.Schema.Types.ObjectId
+const newBook = new mongoose.Schema({
+    name:String,
+    price:Number,
+    ratings:Number,
+    author_id:{
+        type:ObjectId,
+        ref:"Author",
+    },
+    publisher_id:{
+        type:ObjectId,
+        ref:"Publisher"
+    },
+    isHardCover:{
+        type:Boolean,
+        default:false
+    }
+},{timestamps:true});
 
-const bookSchema = new mongoose.Schema( {
-    name: String,
-    author_id: {
-        type: ObjectId,
-        ref: "Author"
-    }, 
-    price: Number,
-    ratings: Number
-
-
-}, { timestamps: true });
-
-
-module.exports = mongoose.model('LibraryBook', bookSchema)
+module.exports= mongoose.model('Book',newBook)
